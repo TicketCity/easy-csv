@@ -1,0 +1,26 @@
+{
+  "name": "easy-csv",
+  "version": "0.0.1",
+  "description": "JSON to CSV conversion tool.",
+  "main": "easy-csv.js",
+  "scripts": {
+    "start": "npm run easy-csv.js",
+    "test": "mocha test --recursive"
+  },
+  "engineStrict": true,
+  "engines": { "node" : ">4.0.0" },
+  "keywords": [
+    "csv",
+    "json"
+  ],
+  "author": "cmoses@ticketcity.com",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "2.4.5",
+    "should": "8.3.0"
+  },
+  "dependencies": {
+    "bluebird": "3.3.4",
+    "shrinkwrap": "^0.4.0"
+  }
+}
