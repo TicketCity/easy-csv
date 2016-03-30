@@ -34,7 +34,7 @@ describe("#CSV Tests", () => {
         }); //end delimited path, callback
         
         it("Should work with no settings, promise.", (done) => {
-            let expected = fs.readFileSync('./test/docs/test.csv');
+            let expected = fs.readFileSync('./test/docs/promise.csv');
             let test = [{ name: "chevy", make: "silverado", year: 2016 },
                         { name: "ford",  make: "f-150", year: 2016 }];
 
@@ -57,6 +57,28 @@ describe("#CSV Tests", () => {
             let fieldNames = ["Make", "Model", "Year"];
             
             CSV.toCSV(test, {fieldNames})
+                .then(csv => {
+                    should.exist(csv);
+                    should.equal(csv, expected);
+                    done();
+                })
+                .catch(err => {
+                    should.not.exist(err);
+                    done();
+                });
+        });
+        
+        it("Should handle large Obj array.", (done) => {
+            let expected = fs.readFileSync('./test/docs/large.csv');
+            let test = require('./docs/test.json');
+            let fields = ["venueId", "venueName", "setupId", "setupName", "sectionId", "name", "row", "prestigeScore", "viewScore", "comfortScore", "rowScore", 
+                        "prestigeWeight", "viewWeight", "comfortWeight", "seatScore", "latitude", "longitude", "elevation", "geographic", "sun", 
+                        "homeOrVisitor", "closestEntry", "concessions", "SseatType", "parking", "notes"];
+            let fieldNames =     ["Venue_ID", "VenueName", "Setup_ID", "SetupName", "Section_ID", "Name", "Row", "Prestige_Score", "View_Score", "Comfort_Score", "Row_Score", "Prestige_Weight", 
+                        "View_Weight", "Comfort_Weight", "Seat_Score", "Latitude",	"Longitude", "Elevation", "Geographic position", "Position relative to sun", 
+                        "Relative to home/visitor/stage", "Closest entry/exit game", "Concessions closest accessible", "Seat Type", "Closest Parking", "Notes"];
+            
+            CSV.toCSV(test, {fields, fieldNames})
                 .then(csv => {
                     should.exist(csv);
                     should.equal(csv, expected);

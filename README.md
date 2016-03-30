@@ -59,3 +59,4 @@ $ npm run test
 ```
 
 Thanks in advance for reporting any issues or bugs!
+[TicketCity](ticketcity.com)
